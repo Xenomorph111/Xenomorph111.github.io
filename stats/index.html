@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="css/styles.css">
+		<link rel="stylesheet" type="text/css" href="../css/styles.css">
 		<script src="scripts/test.js"></script>
 		<title>truda</title>
 	</head>
@@ -19,39 +19,40 @@
 			</div>
 		</div>
 	
-
-		<div class="pretty">
-			enter your dumb ass username for intruder<br>
-			<input type="text" id="intruderName" placeholder="Enter Your IGN">
-			<button onclick="getIntruderStats()">Get Stats</button><br>
-		
-			<h1><div id="iName"></div></h1>
-			<div id="output"></div>
-			<h1><div id="iName2"></div></h1>
-			<div id="output2"></div>
+		<div class="back">
+			<div class="pretty">
+				enter your dumb ass username for intruder<br>
+				<input type="text" id="intruderName" placeholder="Enter Your IGN">
+				<button onclick="getIntruderStats()">Get Stats</button><br>
 			
-			Alternatively, here's the top 100 in whatever you want<br>
-			
-			<!--<input type="text" id="statName" placeholder="pick your stat">-->
-			<select name="stats" id="statName">
-				<option value="stats.kills">Kills</option>
-				<option value="stats.deaths">Deaths</option>
-				<option value="stats.arrests">Arrests</option>
-				<option value="stats.knockdowns">Knockdowns</option>
-				<option value="stats.matcheswon">Matches Won</option>
-				<option value="stats.matcheslost">Matches Lost</option>
-				<option value="stats.heals">Heals</option>
-				<option value="stats.gothealed">Got Healed</option>
-				<option value="stats.teamkills">Team Kills</option>
-				<option value="stats.teamknockdowns">Team Knockdowns</option>
-				<option value="stats.teamdamage">Team Damage</option>
-				<option value="stats.gotarrested">Got Arrested</option>
-				<option value="stats.gotknockeddown">Got Knocked Down</option>
-				<option value="stats.suicides">Suicides</option>
+				<h1><div id="iName"></div></h1>
+				<div id="output"></div>
+				<h1><div id="iName2"></div></h1>
+				<div id="output2"></div>
+				
+				Alternatively, here's the top 100 in whatever you want<br>
+				
+				<!--<input type="text" id="statName" placeholder="pick your stat">-->
+				<select name="stats" id="statName">
+					<option value="stats.kills">Kills</option>
+					<option value="stats.deaths">Deaths</option>
+					<option value="stats.arrests">Arrests</option>
+					<option value="stats.knockdowns">Knockdowns</option>
+					<option value="stats.matcheswon">Matches Won</option>
+					<option value="stats.matcheslost">Matches Lost</option>
+					<option value="stats.heals">Heals</option>
+					<option value="stats.gothealed">Got Healed</option>
+					<option value="stats.teamkills">Team Kills</option>
+					<option value="stats.teamknockdowns">Team Knockdowns</option>
+					<option value="stats.teamdamage">Team Damage</option>
+					<option value="stats.gotarrested">Got Arrested</option>
+					<option value="stats.gotknockeddown">Got Knocked Down</option>
+					<option value="stats.suicides">Suicides</option>
 
-			</select>
-			<button onclick="sussyAmongusBalls()">Get Stats</button><br>
-			<div id="output3"></div>
+				</select>
+				<button onclick="sussyAmongusBalls()">Get Stats</button><br>
+				<div id="output3"></div>
+			</div>
 		</div>
 		
 	</body>
