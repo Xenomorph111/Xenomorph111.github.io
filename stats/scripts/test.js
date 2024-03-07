@@ -39,17 +39,31 @@ async function getIntruderStats(){
 }
 async function sussyAmongusBalls(){
 	//8======D 0
+	//let loadingWheel = document.getElementById("loading1");
+	//loadingWheel.innerHTML = "<img src=../assets/loading.gif></img>";
+	let loadingStat = document.getElementById("loading2");
+	loadingStat.innerHTML = "0%";
 	
-	let stat = document.getElementById("statName").value.toLowerCase();
-	let apiUrl = 'https://api.intruderfps.com/agents' +'?OrderBy=' + stat +'%3Adesc&PerPage=100&&Page=1';
+	let stat = document.getElementById("statName").value;
+	let amnt = document.getElementById("statAmnt").value;
+	let rawStat = stat.slice(6);
+	let apiUrl = 'https://api.intruderfps.com/agents' +'?OrderBy=' + stat +'%3Adesc&PerPage='+amnt+'&&Page=1';
 	const rawData = await fetchData(apiUrl);
 	//const data = JSON.stringify(rawData.data);
-	let leaderboard = "";
+	let leaderboard = "<table><tr><th>#</th><th>Pic</th><th>Name</th><th>&nbsp;Amount&nbsp;</th></tr>";
 	let count = 0;
 	for (let person in rawData.data){
 		count= count+1;
-		leaderboard = leaderboard + JSON.stringify(rawData.data[person].name).slice(1,-1)+":"+count+" <br> ";
+		let dynApi = 'https://api.intruderfps.com/agents/' + JSON.stringify(rawData.data[person].steamId).slice(1,-1)+"/stats";
+		let timeKiller = await fetchData(dynApi);
+		eval('timeKiller = JSON.stringify(timeKiller.'+rawStat+');');
+		leaderboard = leaderboard +"<tr><td>&nbsp;"+count+"&nbsp;</td><td>"+"<img height=50 width = 50 src="+JSON.stringify(rawData.data[person].avatarUrl)+"alt=\"\"></td><td>&nbsp;"+JSON.stringify(rawData.data[person].name).slice(1,-1)+"&nbsp;</td><td>"+timeKiller+"</td></tr>";
+		loading = (count/amnt)*100;
+		loadingStat.innerHTML = loading.toFixed(0) +"%";
 	}
-	const outStats = document.getElementById("output3");
+	//loadingWheel.innerHTML = "";
+	loadingStat.innerHTML = "";
+	leaderboard = leaderboard+"</table>";
+	let outStats = document.getElementById("output3");
 	outStats.innerHTML = leaderboard;
 }

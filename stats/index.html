@@ -10,7 +10,7 @@
 				<div class="sitename">
 					<h1>TrudaStats</h1>
 				</div>
-				
+
 				<ul class="nav">
 					<a href="/home" target="_self"><li>home</li></a>
 					<a href="/stats" target="_self"><li>stats</li></a>
@@ -30,7 +30,7 @@
 				<h1><div id="iName2"></div></h1>
 				<div id="output2"></div>
 				
-				Alternatively, here's the top 100 in whatever you want<br>
+				Alternatively, here's the top in whatever you want, however you want<br>
 				<!--Alternatively, kill yourself-->
 				
 				<!--Here are all the options(actually not all of them kill yourself) @xenomorph101 if you want me to add more-->
@@ -39,18 +39,26 @@
 					<option value="stats.deaths">Deaths</option>
 					<option value="stats.arrests">Arrests</option>
 					<option value="stats.knockdowns">Knockdowns</option>
-					<option value="stats.matcheswon">Matches Won</option>
-					<option value="stats.matcheslost">Matches Lost</option>
+					<option value="stats.matchesWon">Matches Won</option>
+					<option value="stats.matchesLost">Matches Lost</option>
 					<option value="stats.heals">Heals</option>
-					<option value="stats.gothealed">Got Healed</option>
-					<option value="stats.teamkills">Team Kills</option>
-					<option value="stats.teamknockdowns">Team Knockdowns</option>
-					<option value="stats.teamdamage">Team Damage</option>
-					<option value="stats.gotarrested">Got Arrested</option>
-					<option value="stats.gotknockeddown">Got Knocked Down</option>
+					<option value="stats.gotHealed">Got Healed</option>
+					<option value="stats.teamKills">Team Kills</option>
+					<option value="stats.teamKnockdowns">Team Knockdowns</option>
+					<option value="stats.teamDamage">Team Damage</option>
+					<option value="stats.gotArrested">Got Arrested</option>
+					<option value="stats.gotKnockedDown">Got Knocked Down</option>
 					<option value="stats.suicides">Suicides</option>
 				</select>
-				<button onclick="sussyAmongusBalls()">Get Stats</button><br>
+				<select name="Amount" id="statAmnt">
+					<option value="10">10</option>
+					<option value="25">25</option>
+					<option value="50">50</option>
+					<option value="100">100</option>
+				</select>
+				<button onclick="sussyAmongusBalls()">Get Stats</button><br><br>
+				<div id="loading1"></div>
+				<div id="loading2"></div>
 				<div id="output3"></div>
 			</div>
 		</div>
