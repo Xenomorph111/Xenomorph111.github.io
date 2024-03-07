@@ -26,16 +26,26 @@ async function getIntruderStats(){
 	let apiUrl2 = 'https://api.intruderfps.com/agents/' +steamId.replace(/['"]+/g, '')+'/stats';
 	const rawData2 = await fetchData(apiUrl2);
 	
-	const data = JSON.stringify(rawData2);
+	let data = "";
+	tehe = JSON.stringify(rawData2).slice(1,-1).split(",");
+	for(let x in tehe){
+		data = data+tehe[x]+"<br>";
+	}
+	//const data = JSON.stringify(rawData2);
 	
 	const outStats = document.getElementById("output");
-	outStats.textContent = data;
+	outStats.innerHTML = data;
 	
 	let apiUrl3 = 'https://api.intruderfps.com/agents/' +steamId.replace(/['"]+/g, '');
 	const rawData3 = await fetchData(apiUrl3);
-	const data2 = JSON.stringify(rawData3);
+	tehe2 = JSON.stringify(rawData3).slice(1,-1).split(",");
+	let data2 = "";
+	for(let y in tehe2){
+		data2 = data2+tehe2[y]+"<br>";
+	}
+	//const data2 = JSON.stringify(rawData3);
 	const outStats2 = document.getElementById("output2");
-	outStats2.textContent = data2;
+	outStats2.innerHTML = data2;
 }
 async function sussyAmongusBalls(){
 	//8======D 0
