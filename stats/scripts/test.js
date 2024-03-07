@@ -43,7 +43,13 @@ async function sussyAmongusBalls(){
 	let stat = document.getElementById("statName").value.toLowerCase();
 	let apiUrl = 'https://api.intruderfps.com/agents' +'?OrderBy=' + stat +'%3Adesc&PerPage=100&&Page=1';
 	const rawData = await fetchData(apiUrl);
-	const data = JSON.stringify(rawData2);
+	//const data = JSON.stringify(rawData.data);
+	let leaderboard = "";
+	let count = 0;
+	for (let person in rawData.data){
+		count= count+1;
+		leaderboard = leaderboard + JSON.stringify(rawData.data[person].name).slice(1,-1)+":"+count+" <br> ";
+	}
 	const outStats = document.getElementById("output3");
-	outStats.textContent = data;
+	outStats.innerHTML = leaderboard;
 }
