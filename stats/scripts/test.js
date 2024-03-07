@@ -37,3 +37,13 @@ async function getIntruderStats(){
 	const outStats2 = document.getElementById("output2");
 	outStats2.textContent = data2;
 }
+async function sussyAmongusBalls(){
+	//8======D 0
+	
+	let stat = document.getElementById("statName").value.toLowerCase();
+	let apiUrl = 'https://api.intruderfps.com/agents' +'?OrderBy=' + stat +'%3Adesc&PerPage=100&&Page=1';
+	const rawData = await fetchData(apiUrl);
+	const data = JSON.stringify(rawData2);
+	const outStats = document.getElementById("output3");
+	outStats.textContent = data;
+}
