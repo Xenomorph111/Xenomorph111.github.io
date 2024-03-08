@@ -12,6 +12,13 @@ async function fetchData(url){
 		console.log(error)
 	}
 }
+
+async function fetchManyData(urls){
+	const somethings = urls.map(fetchData);
+	const responses = await Promise.all(somethings);
+	return responses;
+}
+
 async function getIntruderStats(){
 	let name = document.getElementById("intruderName").value.toLowerCase();
 	let apiUrl1 = 'https://api.intruderfps.com/agents' +'?PerPage=100&Q=' + name;
@@ -46,32 +53,6 @@ async function getIntruderStats(){
 	//const data2 = JSON.stringify(rawData3);
 	const outStats2 = document.getElementById("output2");
 	outStats2.innerHTML = data2;
-}
-
-async function theSUSSYIMPOSTERISINMYBRAINHELPMEGODHELPMEHELPHELP(red,sus){
-	
-	//important variables
-	const trudaList = [];
-	let count = 0;
-	
-	//generate the urls
-	const urlList = []
-	for (person in red.data){
-		urlList.push('https://api.intruderfps.com/agents/' + JSON.stringify(red.data[person].steamId).slice(1,-1)+"/stats");
-	}
-	//with url list we now map it to the data fetcher function, and make it promise to finish before it generates our list
-	const somethings = urlList.map(fetchData);
-	const responses = await Promise.all(somethings);
-	
-	//now we generate the table stuff bcs we can
-	for (let person in red.data){
-			data = responses[count];
-			eval('data = JSON.stringify(data.'+sus+');');
-			trudaList.push([JSON.stringify(red.data[person].avatarUrl),JSON.stringify(red.data[person].name).slice(1,-1),data,JSON.stringify(red.data[person].steamId).slice(1,-1)]);
-			count = count + 1;
-	}
-	//finally it will return the finished table parts
-	return trudaList;
 }
 
 
@@ -109,7 +90,7 @@ async function sussyAmongusBalls(){
 	//now we assemble the table, in its glory
 	for(let elem in sortedTrudaList){
 	count = count+1;
-	leaderboard = leaderboard +"<tr><td>&nbsp;"+count+"&nbsp;</td><td>"+"<img height=50 width = 50 src="+sortedTrudaList[elem][0]+"alt=\"\"></td><td>&nbsp;<a href=/stats/profile?"+sortedTrudaList[elem][3]+">"+sortedTrudaList[elem][1]+"</a>&nbsp;</td><td>"+sortedTrudaList[elem][2]+"</td></tr>";
+	leaderboard = leaderboard +"<tr><td>&nbsp;"+count+"&nbsp;</td><td>"+"<img height=50 width = 50 src="+sortedTrudaList[elem][0]+"alt=\"\"></td><td>&nbsp;"+sortedTrudaList[elem][1]+"&nbsp;</td><td>"+sortedTrudaList[elem][2]+"</td></tr>";
 	}
 	leaderboard = leaderboard+"</table>";
 	
