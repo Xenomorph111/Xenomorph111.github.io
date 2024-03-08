@@ -85,6 +85,10 @@ async function sussyAmongusBalls(){
 	let rawStat = stat.slice(6);
 	let outStats = document.getElementById("output3");
 	
+	//we also wanna disable that pesky button for the time being, i dont want them to break everything...
+	const button = document.getElementById("buttonLeader");
+	button.disabled = true;
+	
 	//first we lie and tell them we are loading (ARE ASSES ARE NOT LOADING)
 	outStats.innerHTML = "<img width=25 height=25 src=../assets/loading.gif></img>";
 	
@@ -109,8 +113,7 @@ async function sussyAmongusBalls(){
 	}
 	leaderboard = leaderboard+"</table>";
 	
-	//now we grab where the table is, and we paste it in, and we are so done
-	
+	//now we grab where the table is, and we paste it in, and we are so done, AND we re-enable that button
 	outStats.innerHTML = leaderboard;
-	
+	button.disabled = false;
 }
