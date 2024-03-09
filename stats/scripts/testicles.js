@@ -89,7 +89,7 @@ async function getIntruderStats(steamId){
 	name.innerHTML = JSON.stringify(rawMisc.name).slice(1,-1);
 	
 	const picHTML = document.getElementById("pic");
-	picHTML.innerHTML = pic;
+	picHTML.innerHTML = "<img src="+pic+"></img>";
 	
 	const role = document.getElementById("role");
 	role.innerHTML = JSON.stringify(rawMisc.role).slice(1,-1);
