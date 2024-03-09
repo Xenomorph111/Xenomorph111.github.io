@@ -78,6 +78,14 @@ async function theSUSSYIMPOSTERISINMYBRAINHELPMEGODHELPMEHELPHELP(red,sus){
 async function sussyAmongusBalls(){
 	//definitions, grab the stat name, and the amount the user wants, and slice the stat so its only the usable version for us
 	let stat = document.getElementById("statName").value;
+	let LMFAO = false;
+	if(stat =="stats.timePlayed"){
+		LMFAO = true;
+	}
+	else
+	{
+		LMFAO = false;
+	}
 	let amnt = document.getElementById("statAmnt").value;
 	let leaderboard = "<table><tr><th>#</th><th>Pfp</th><th>Name</th><th>&nbsp;Amount&nbsp;</th></tr>";
 	var trudaList = [];
@@ -109,7 +117,14 @@ async function sussyAmongusBalls(){
 	//now we assemble the table, in its glory
 	for(let elem in sortedTrudaList){
 	count = count+1;
-	leaderboard = leaderboard +"<tr><td>&nbsp;"+count+"&nbsp;</td><td>"+"<img height=50 width = 50 src="+sortedTrudaList[elem][0]+"alt=\"\"></td><td>&nbsp;<a href=/stats/profile?steamid="+sortedTrudaList[elem][3]+">"+sortedTrudaList[elem][1]+"</a>&nbsp;</td><td>"+sortedTrudaList[elem][2]+"</td></tr>";
+	if(!LMFAO){
+		leaderboard = leaderboard +"<tr><td>&nbsp;"+count+"&nbsp;</td><td>"+"<img height=50 width = 50 src="+sortedTrudaList[elem][0]+"alt=\"\"></td><td>&nbsp;<a href=/stats/profile?steamid="+sortedTrudaList[elem][3]+">"+sortedTrudaList[elem][1]+"</a>&nbsp;</td><td>"+sortedTrudaList[elem][2]+"</td></tr>";
+	}
+	else{
+		let clutterTime = sortedTrudaList[elem][2];
+		let cleanTime = clutterTime/(60*60)+"h";
+		leaderboard = leaderboard +"<tr><td>&nbsp;"+count+"&nbsp;</td><td>"+"<img height=50 width = 50 src="+sortedTrudaList[elem][0]+"alt=\"\"></td><td>&nbsp;<a href=/stats/profile?steamid="+sortedTrudaList[elem][3]+">"+sortedTrudaList[elem][1]+"</a>&nbsp;</td><td>"+cleanTime+"</td></tr>";
+	}
 	}
 	leaderboard = leaderboard+"</table>";
 	
