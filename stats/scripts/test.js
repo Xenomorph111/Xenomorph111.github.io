@@ -60,7 +60,7 @@ async function sussyAmongusBalls(){
 	let apiUrl = 'https://api.intruderfps.com/agents' +'?OrderBy=' + stat +'%3Adesc&PerPage='+amnt+'&&Page=1';
 	const rawData = await fetchData(apiUrl);
 	//const data = JSON.stringify(rawData.data);
-	let leaderboard = "<table><tr><th>#</th><th>Pic</th><th>Name</th><th>&nbsp;Amount&nbsp;</th></tr>";
+	let leaderboard = "<table><tr><th>#</th><th>Pfp</th><th>Name</th><th>&nbsp;Amount&nbsp;</th></tr>";
 	let count = 0;
 	for (let person in rawData.data){
 		count= count+1;

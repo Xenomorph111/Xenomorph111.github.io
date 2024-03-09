@@ -79,7 +79,7 @@ async function sussyAmongusBalls(){
 	//definitions, grab the stat name, and the amount the user wants, and slice the stat so its only the usable version for us
 	let stat = document.getElementById("statName").value;
 	let amnt = document.getElementById("statAmnt").value;
-	let leaderboard = "<table><tr><th>#</th><th>Pic</th><th>Name</th><th>&nbsp;Amount&nbsp;</th></tr>";
+	let leaderboard = "<table><tr><th>#</th><th>Pfp</th><th>Name</th><th>&nbsp;Amount&nbsp;</th></tr>";
 	var trudaList = [];
 	let count = 0;
 	let rawStat = stat.slice(6);
@@ -109,7 +109,7 @@ async function sussyAmongusBalls(){
 	//now we assemble the table, in its glory
 	for(let elem in sortedTrudaList){
 	count = count+1;
-	leaderboard = leaderboard +"<tr><td>&nbsp;"+count+"&nbsp;</td><td>"+"<img height=50 width = 50 src="+sortedTrudaList[elem][0]+"alt=\"\"></td><td>&nbsp;<a href=/stats/profile?"+sortedTrudaList[elem][3]+">"+sortedTrudaList[elem][1]+"</a>&nbsp;</td><td>"+sortedTrudaList[elem][2]+"</td></tr>";
+	leaderboard = leaderboard +"<tr><td>&nbsp;"+count+"&nbsp;</td><td>"+"<img height=50 width = 50 src="+sortedTrudaList[elem][0]+"alt=\"\"></td><td>&nbsp;<a href=/stats/profile?steamid="+sortedTrudaList[elem][3]+">"+sortedTrudaList[elem][1]+"</a>&nbsp;</td><td>"+sortedTrudaList[elem][2]+"</td></tr>";
 	}
 	leaderboard = leaderboard+"</table>";
 	

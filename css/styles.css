@@ -78,23 +78,23 @@
 	height: 50px; */
 	float:left;
 }
-.a:link {
+a:link{
+  color:#A8A8A8;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
   color: #A8A8A8;
   background-color: transparent;
   text-decoration: none;
 }
-.a:visited {
-  color: pink;
-  background-color: transparent;
-  text-decoration: none;
-}
-.a:hover {
-  color: red;
+a:hover {
+  color: #A8A8A8;
   background-color: transparent;
   text-decoration: underline;
 }
-.a:active {
-  color: yellow;
+a:active {
+  color: #A8A8A8;
   background-color: transparent;
   text-decoration: underline;
 }

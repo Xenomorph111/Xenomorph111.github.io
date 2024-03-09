@@ -19,18 +19,26 @@ async function fetchManyData(urls){
 	return responses;
 }
 
-async function getIntruderStats(){
-	let name = document.getElementById("intruderName").value.toLowerCase();
-	let apiUrl1 = 'https://api.intruderfps.com/agents' +'?PerPage=100&Q=' + name;
+function makeStatLeaderUrl(stat){
+	return 'https://api.intruderfps.com/agents' +'?OrderBy=' + stat +'%3Adesc&PerPage='+100+'&&Page=1';
+}
+
+function makeStatLeaderUrls(stats){
+	const cookedUrls = stats.map(makeStatLeaderUrl);
+	return cookedUrls;
+}
+
+async function getIntruderStats(steamId){
+	//let name = document.getElementById("intruderName").value.toLowerCase();
+	let apiUrl1 = 'https://api.intruderfps.com/agents/'+steamId;
 	const rawData1 = await fetchData(apiUrl1);
 	
-	let steamId = JSON.stringify(rawData1.data[0].steamId);
-	let IGN = JSON.stringify(rawData1.data[0].name).replace(/['"]+/g, '');
+	let IGN = JSON.stringify(rawData1.name).replace(/['"]+/g, '');
 	const outName = document.getElementById("iName");
 	const outName2 = document.getElementById("iName2");
 	outName.textContent = `${IGN}'s stats:`;
 	outName2.textContent = `${IGN}'s extra jazz:`;
-	let apiUrl2 = 'https://api.intruderfps.com/agents/' +steamId.replace(/['"]+/g, '')+'/stats';
+	let apiUrl2 = 'https://api.intruderfps.com/agents/' +steamId+'/stats';
 	const rawData2 = await fetchData(apiUrl2);
 	
 	let data = "";
@@ -43,9 +51,9 @@ async function getIntruderStats(){
 	const outStats = document.getElementById("output");
 	outStats.innerHTML = data;
 	
-	let apiUrl3 = 'https://api.intruderfps.com/agents/' +steamId.replace(/['"]+/g, '');
-	const rawData3 = await fetchData(apiUrl3);
-	tehe2 = JSON.stringify(rawData3).slice(1,-1).split(",");
+	//let apiUrl3 = 'https://api.intruderfps.com/agents/' +steamId.replace(/['"]+/g, '');
+	//const rawData = await fetchData(apiUrl3);
+	tehe2 = JSON.stringify(rawData1).slice(1,-1).split(",");
 	let data2 = "";
 	for(let y in tehe2){
 		data2 = data2+tehe2[y]+"<br>";
@@ -54,7 +62,6 @@ async function getIntruderStats(){
 	const outStats2 = document.getElementById("output2");
 	outStats2.innerHTML = data2;
 }
-
 
 async function sussyAmongusBalls(){
 	//definitions, grab the stat name, and the amount the user wants, and slice the stat so its only the usable version for us
@@ -97,4 +104,36 @@ async function sussyAmongusBalls(){
 	//now we grab where the table is, and we paste it in, and we are so done, AND we re-enable that button
 	outStats.innerHTML = leaderboard;
 	button.disabled = false;
+}
+
+async function updateUIElements(div,content1,content2,url){
+	let nameJumble = await fetchData(url);
+	let name = JSON.stringify(nameJumble.name);
+	div.innerHTML = content1+name.slice(1,-1)+content2;
+}
+
+
+window.onload = function() {
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+
+const steamid = urlParams.get('steamid');
+
+if(!steamid==true){
+	//first time?
+	console.log("THE URL IS NEW");
+	const baby = document.getElementById("newborn");
+	baby.style.display = "block";
+}
+else
+{
+	//we have a profile boyysssssssss
+	console.log("THE URL IS OLD");
+	const main = document.getElementById("mainbody");
+	const title = document.getElementById("title");
+	let apiUrl = 'https://api.intruderfps.com/agents/'+steamid;
+	updateUIElements(main,"<h1>","</h1>",apiUrl);
+	updateUIElements(title,"","'s Profile",apiUrl);
+	getIntruderStats(steamid);
+}
 }
