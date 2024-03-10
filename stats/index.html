@@ -8,54 +8,60 @@
           type="image/x-icon">
 	</head>
 	<body>
-		<div class="header">
-			<div class="inner_header">
-				<div class="sitename">
-					<h1>TrudaStats</h1>
+		<div class="main">
+			<div class="header">
+			
+				<div class="navbar">
+						<div class="sitename">
+							<h1>XenoSite</h1>
+						</div>
+						
+						<div class="links">
+							<a href="/home" target="_self"><div class="link">home</div></a>
+							<a href="/stats" target="_self"><div class="link">stats</div></a>
+							<a href="/about" target="_self"><div class="link">about</div></a>
+						</div>
 				</div>
-
-				<ul class="nav">
-					<a href="/home" target="_self"><li>home</li></a>
-					<a href="/stats" target="_self"><li>stats</li></a>
-					<a href="/about" target="_self"><li>about</li></a>
-				</ul>
+				
 			</div>
-		</div>
-	
-		<div class="back">
-			<div class="pretty">
+		
+			<div class="mainbody">
+				<div class="pretty">
+						
+						<br><h1>LEADERBOARD</h1><br>
+					<!--Here are all the options(actually not all of them kill yourself) @xenomorph101 if you want me to add more-->
+					TOP:&nbsp;&nbsp;<select name="stats" id="statName">
+						<option value="stats.kills">Kills</option>
+						<option value="stats.deaths">Deaths</option>
+						<option value="stats.arrests">Arrests</option>
+						<option value="stats.knockdowns">Knockdowns</option>
+						<option value="stats.matchesWon">Matches Won</option>
+						<option value="stats.matchesLost">Matches Lost</option>
+						<option value="stats.heals">Heals</option>
+						<option value="stats.gotHealed">Got Healed</option>
+						<option value="stats.teamKills">Team Kills</option>
+						<option value="stats.teamKnockdowns">Team Knockdowns</option>
+						<option value="stats.teamDamage">Team Damage</option>
+						<option value="stats.gotArrested">Got Arrested</option>
+						<option value="stats.gotKnockedDown">Got Knocked Down</option>
+						<option value="stats.suicides">Suicides</option>
+						<option value="stats.timePlayed">Time Played (skull)</option>
+						
+					</select>
+					<select name="Amount" id="statAmnt">
+						<option value="10">10</option>
+						<option value="25">25</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select>
+					<button id="buttonLeader" onclick="sussyAmongusBalls()">Get Stats</button><br><br>
+					<div id="loading1"></div>
+					<div id="loading2"></div>
+					<div id="output3"></div>
 					
-					<br><h1>LEADERBOARD</h1><br>
-				<!--Here are all the options(actually not all of them kill yourself) @xenomorph101 if you want me to add more-->
-				TOP:&nbsp;&nbsp;<select name="stats" id="statName">
-					<option value="stats.kills">Kills</option>
-					<option value="stats.deaths">Deaths</option>
-					<option value="stats.arrests">Arrests</option>
-					<option value="stats.knockdowns">Knockdowns</option>
-					<option value="stats.matchesWon">Matches Won</option>
-					<option value="stats.matchesLost">Matches Lost</option>
-					<option value="stats.heals">Heals</option>
-					<option value="stats.gotHealed">Got Healed</option>
-					<option value="stats.teamKills">Team Kills</option>
-					<option value="stats.teamKnockdowns">Team Knockdowns</option>
-					<option value="stats.teamDamage">Team Damage</option>
-					<option value="stats.gotArrested">Got Arrested</option>
-					<option value="stats.gotKnockedDown">Got Knocked Down</option>
-					<option value="stats.suicides">Suicides</option>
-					<option value="stats.timePlayed">Time Played (skull)</option>
-					
-				</select>
-				<select name="Amount" id="statAmnt">
-					<option value="10">10</option>
-					<option value="25">25</option>
-					<option value="50">50</option>
-					<option value="100">100</option>
-				</select>
-				<button id="buttonLeader" onclick="sussyAmongusBalls()">Get Stats</button><br><br>
-				<div id="loading1"></div>
-				<div id="loading2"></div>
-				<div id="output3"></div>
+				</div>
 			</div>
+			<div class="footer"></div>
 		</div>
 	</body>
 </html>

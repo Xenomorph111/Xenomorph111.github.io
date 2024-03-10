@@ -65,9 +65,13 @@ async function theSUSSYIMPOSTERISINMYBRAINHELPMEGODHELPMEHELPHELP(red,sus){
 	
 	//now we generate the table stuff bcs we can
 	for (let person in red.data){
-			data = responses[count];
-			eval('data = JSON.stringify(data.'+sus+');');
-			trudaList.push([JSON.stringify(red.data[person].avatarUrl),JSON.stringify(red.data[person].name).slice(1,-1),data,JSON.stringify(red.data[person].steamId).slice(1,-1)]);
+			dataRaw = responses[count];
+			eval("data = JSON.stringify(dataRaw."+sus+");");
+			kills = JSON.stringify(dataRaw.kills);
+			deaths = JSON.stringify(dataRaw.deaths);
+			kdRatio = Math.round((kills/deaths + Number.EPSILON) * 100) / 100;
+			trudaList.push([JSON.stringify(red.data[person].avatarUrl),JSON.stringify(red.data[person].name).slice(1,-1),data,JSON.stringify(red.data[person].steamId).slice(1,-1),kdRatio]);
+			
 			count = count + 1;
 	}
 	//finally it will return the finished table parts
@@ -87,7 +91,7 @@ async function sussyAmongusBalls(){
 		LMFAO = false;
 	}
 	let amnt = document.getElementById("statAmnt").value;
-	let leaderboard = "<table><tr><th>#</th><th>Pfp</th><th>Name</th><th>&nbsp;Amount&nbsp;</th></tr>";
+	let leaderboard = "<table><tr><th>#</th><th>Pfp</th><th>Name</th><th>&nbsp;Amount&nbsp;</th><th>&nbsp;K/D&nbsp;</th></tr>";
 	var trudaList = [];
 	let count = 0;
 	let rawStat = stat.slice(6);
@@ -107,24 +111,34 @@ async function sussyAmongusBalls(){
 	//lets wait for the async function to finish so we get 100 users all ordered
 	sortedTrudaList = await theSUSSYIMPOSTERISINMYBRAINHELPMEGODHELPMEHELPHELP(rawData,rawStat);
 
-	//sort this list, wait. we dont need to anymore, LETS FUCKING GO EZ CLAP FORTNITE DUBS EZ EZ EZ EZ EZ EZ
-	/*
-	var sortedTrudaList = trudaList.sort(function(a, b) {
-		return b[2] - a[2];
-	});
-	*/
 	
 	//now we assemble the table, in its glory
 	for(let elem in sortedTrudaList){
 	count = count+1;
 	if(!LMFAO){
-		leaderboard = leaderboard +"<tr><td>&nbsp;"+count+"&nbsp;</td><td>"+"<img height=50 width = 50 src="+sortedTrudaList[elem][0]+"alt=\"\"></td><td>&nbsp;<a href=/stats/profile?steamid="+sortedTrudaList[elem][3]+">"+sortedTrudaList[elem][1]+"</a>&nbsp;</td><td>"+sortedTrudaList[elem][2]+"</td></tr>";
-	}
+		leaderboard = leaderboard +"<tr><td>&nbsp;"+count+"&nbsp;</td><td>"+"<img height=50 width = 50 src="+sortedTrudaList[elem][0]+"alt=\"\"></td><td>&nbsp;<a href=/stats/profile?steamid="+sortedTrudaList[elem][3]+">"+sortedTrudaList[elem][1]+"</a>&nbsp;</td><td>"+sortedTrudaList[elem][2]+"</td><td>&nbsp;";
+		}
 	else{
-		let clutterTime = sortedTrudaList[elem][2];
-		let cleanTime = clutterTime/(60*60)+"h";
-		leaderboard = leaderboard +"<tr><td>&nbsp;"+count+"&nbsp;</td><td>"+"<img height=50 width = 50 src="+sortedTrudaList[elem][0]+"alt=\"\"></td><td>&nbsp;<a href=/stats/profile?steamid="+sortedTrudaList[elem][3]+">"+sortedTrudaList[elem][1]+"</a>&nbsp;</td><td>"+cleanTime+"</td></tr>";
-	}
+		let timeSeconds = sortedTrudaList[elem][2];
+		let timeHours = timeSeconds/(60*60);
+		let timeRealHours = Math.floor(timeHours);
+		let timeMinutes = (timeHours - timeRealHours)*60;
+		let timeRealMinutes = Math.floor(Math.round(timeMinutes));
+		let cleanTime = timeRealHours+"h "+timeRealMinutes+"m";
+		leaderboard = leaderboard +"<tr><td>&nbsp;"+count+"&nbsp;</td><td>"+"<img height=50 width = 50 src="+sortedTrudaList[elem][0]+"alt=\"\"></td><td>&nbsp;<a href=/stats/profile?steamid="+sortedTrudaList[elem][3]+">"+sortedTrudaList[elem][1]+"</a>&nbsp;</td><td>"+cleanTime+"</td><td>&nbsp;";
+		}
+	
+	//if ratio above 1, its positive
+	var kd = sortedTrudaList[elem][4];
+	if(kd>1){
+		kd = "<div class=posratio>"+kd+"</div>";
+		}
+	//else its negative
+	else
+		{
+		kd = "<div class=negratio>"+kd+"</div>";
+		}
+	leaderboard = leaderboard + kd +"&nbsp;</td></tr>";
 	}
 	leaderboard = leaderboard+"</table>";
 	

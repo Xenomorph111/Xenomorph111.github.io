@@ -28,6 +28,47 @@ function makeStatLeaderUrls(stats){
 	return cookedUrls;
 }
 
+function makeUrl(stat, page){
+	let url = 'https://api.intruderfps.com/agents' +'?OrderBy=' + stat +'%3Adesc&PerPage=100&Page='+page;
+	return url
+}
+function check(data){
+}
+async function findYourLeaderboardPosition(steamId,stat){
+	let j = 0;
+	let position = 0;
+	var rawSewage;
+	while(true){
+		url = makeUrl(stat,j+1);
+		const rawSewage = await fetchData(url);
+		const peeps = await rawSewage.data;
+		//leaderboardOfStat = rawSewage.data;
+		for( let player in peeps){
+			if(JSON.stringify(peeps[player].steamId).slice(1,-1)==steamId){
+				finalPosition = position+1
+				switch(finalPosition%10){
+					case 1:
+						return finalPosition+"st";
+					case 2:
+						return finalPosition+"nd";
+					case 3:
+						return finalPosition+"rd";
+					default:
+						return finalPosition+"th";
+				}
+			}
+			else{
+			position=position+1;
+			}
+		}
+		
+		j=j+1;
+	}
+}
+
+
+
+
 async function getIntruderStats(steamId){
 	//let name = document.getElementById("intruderName").value.toLowerCase();
 	let apiUrl1 = 'https://api.intruderfps.com/agents/'+steamId;
@@ -47,13 +88,23 @@ async function getIntruderStats(steamId){
 	let kills = JSON.stringify(rawStats.kills);
 	killsHTML.innerHTML = kills;
 	
+
+	
 	const deathsHTML = document.getElementById("deaths");
 	let deaths = JSON.stringify(rawStats.deaths);
 	deathsHTML.innerHTML = deaths;
 	
+
+	
+	const kdHTML = document.getElementById("kd");
+	let killRatio = Math.round((kills/deaths + Number.EPSILON) * 100) / 100;
+	kdHTML.innerHTML = killRatio;
+	
 	const arrestsHTML = document.getElementById("arrests");
 	let arrests = JSON.stringify(rawStats.arrests)
 	arrestsHTML.innerHTML = arrests;
+
+
 	
 	const tkHTML = document.getElementById("teamkills");
 	let tks = JSON.stringify(rawStats.teamKills)
@@ -79,7 +130,10 @@ async function getIntruderStats(steamId){
 	let time = JSON.stringify(rawStats.timePlayed);
 	//neaten that fuck up
 	let timeHours = time/(60*60);
-	timeHTML.innerHTML = timeHours+"h";
+	let timeRealHours = Math.floor(timeHours);
+	let timeMinutes = (timeHours - timeRealHours)*60;
+	let timeRealMinutes = Math.floor(Math.round(timeMinutes));
+	timeHTML.innerHTML = timeRealHours+"h "+timeRealMinutes+"m";
 	
 	
 	const level = document.getElementById("level");
@@ -94,27 +148,46 @@ async function getIntruderStats(steamId){
 	const role = document.getElementById("role");
 	role.innerHTML = JSON.stringify(rawMisc.role).slice(1,-1);
 
+	//better planning, management and in general actually doing this as a project, i couldve
+	//saved myself so many man hours
 	
-	//let data = "";
-	//tehe = JSON.stringify(rawData2).slice(1,-1).split(",");
-	//for(let x in tehe){
-	//	data = data+tehe[x]+"<br>";
-	//}
-	//const data = JSON.stringify(rawData2);
+	const killsRankHTML = document.getElementById("killsRank");
+	const arrestsRankHTML = document.getElementById("arrestsRank");
+	const deathsRankHTML = document.getElementById("deathsRank");
+	const mwonRankHTML = document.getElementById("mwonRank");
+	const mlostRankHTML = document.getElementById("mlostRank");
+	const healsRankHTML = document.getElementById("healsRank");
+	const gothealedRankHTML = document.getElementById("gothealedRank");
+	const teamkillsRankHTML = document.getElementById("teamkillsRank");
 	
-	//const outStats = document.getElementById("output");
-	//outStats.innerHTML = data;
 	
-	//let apiUrl3 = 'https://api.intruderfps.com/agents/' +steamId.replace(/['"]+/g, '');
-	//const rawData = await fetchData(apiUrl3);
-	//tehe2 = JSON.stringify(rawMisc).slice(1,-1).split(",");
-	//let data2 = "";
-	//for(let y in tehe2){
-	//	data2 = data2+tehe2[y]+"<br>";
-	//}
-	//const data2 = JSON.stringify(rawData3);
-	//const outStats2 = document.getElementById("output2");
-	//outStats2.innerHTML = data2;
+	
+	killsRankHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
+	arrestsRankHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
+	deathsRankHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
+	mwonRankHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
+	mlostRankHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
+	healsRankHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
+	gothealedRankHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
+	teamkillsRankHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
+	
+	const killsRank = await findYourLeaderboardPosition(steamId,"stats.kills");
+	const arrestsRank = await findYourLeaderboardPosition(steamId,"stats.arrests");
+	const deathsRank = await findYourLeaderboardPosition(steamId,"stats.deaths");
+	const mwonRank = await findYourLeaderboardPosition(steamId,"stats.matchesWon");
+	const mlostRank = await findYourLeaderboardPosition(steamId,"stats.matchesLost");
+	const healsRank = await findYourLeaderboardPosition(steamId,"stats.heals");
+	const gothealedRank = await findYourLeaderboardPosition(steamId,"stats.gotHealed");
+	const teamkillsRank = await findYourLeaderboardPosition(steamId,"stats.teamKills");
+	
+	killsRankHTML.innerHTML = killsRank;
+	arrestsRankHTML.innerHTML = arrestsRank;
+	deathsRankHTML.innerHTML = deathsRank;
+	mwonRankHTML.innerHTML = mwonRank;
+	mlostRankHTML.innerHTML = mlostRank;
+	healsRankHTML.innerHTML = healsRank;
+	gothealedRankHTML.innerHTML = gothealedRank;
+	teamkillsRankHTML.innerHTML = teamkillsRank;
 }
 
 async function sussyAmongusBalls(){
