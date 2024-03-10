@@ -130,7 +130,7 @@ async function sussyAmongusBalls(){
 	
 	//if ratio above 1, its positive
 	var kd = sortedTrudaList[elem][4];
-	if(kd>1){
+	if(kd>=1){
 		kd = "<div class=posratio>"+kd+"</div>";
 		}
 	//else its negative
