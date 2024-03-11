@@ -67,7 +67,13 @@ async function findYourLeaderboardPosition(steamId,stat){
 }
 
 
-
+function neatenTime(time){
+	let timeHours = time/(60*60);
+	let timeRealHours = Math.floor(timeHours);
+	let timeMinutes = (timeHours - timeRealHours)*60;
+	let timeRealMinutes = Math.floor(Math.round(timeMinutes));
+	return timeRealHours+"h "+timeRealMinutes+"m";
+}
 
 async function getIntruderStats(steamId){
 	//let name = document.getElementById("intruderName").value.toLowerCase();
@@ -100,6 +106,10 @@ async function getIntruderStats(steamId){
 	let killRatio = Math.round((kills/deaths + Number.EPSILON) * 100) / 100;
 	kdHTML.innerHTML = killRatio;
 	
+	const timeDemotedHTML = document.getElementById("demotedTime");
+	let timeDemoted = JSON.stringify(rawStats.timePlayedDemoted);
+	timeDemotedHTML.innerHTML = neatenTime(timeDemoted);
+	
 	const arrestsHTML = document.getElementById("arrests");
 	let arrests = JSON.stringify(rawStats.arrests)
 	arrestsHTML.innerHTML = arrests;
@@ -129,11 +139,8 @@ async function getIntruderStats(steamId){
 	const timeHTML = document.getElementById("time");
 	let time = JSON.stringify(rawStats.timePlayed);
 	//neaten that fuck up
-	let timeHours = time/(60*60);
-	let timeRealHours = Math.floor(timeHours);
-	let timeMinutes = (timeHours - timeRealHours)*60;
-	let timeRealMinutes = Math.floor(Math.round(timeMinutes));
-	timeHTML.innerHTML = timeRealHours+"h "+timeRealMinutes+"m";
+	
+	timeHTML.innerHTML = neatenTime(time);
 	
 	
 	const level = document.getElementById("level");
@@ -143,14 +150,38 @@ async function getIntruderStats(steamId){
 	name.innerHTML = JSON.stringify(rawMisc.name).slice(1,-1);
 	
 	const picHTML = document.getElementById("pic");
-	picHTML.innerHTML = "<img src="+pic+"></img>";
+	picHTML.innerHTML = "<img width=275px height=275px border-radius=15px src="+pic+"></img>";
 	
-	const role = document.getElementById("role");
-	role.innerHTML = JSON.stringify(rawMisc.role).slice(1,-1);
+	let role = document.getElementById("role");
+	let roleOops = "";
+	const ROLE = String(JSON.stringify(rawMisc.role).slice(1,-1));
+	switch (ROLE){
+		case "AUG":
+			roleOops = "<div class=aug>AUG</div>";
+			break;
+		case "Developer":
+			roleOops = "<div class=developer>Developer</div>";
+			break;
+		case "Demoted":
+			roleOops = "<div class=demoted>Demoted</div>";
+			break;
+		default:
+			roleOops = "<div class=agent>Agent</div>";
+			break;
+	}
+	role.innerHTML = roleOops;
 
 	//better planning, management and in general actually doing this as a project, i couldve
 	//saved myself so many man hours
+	//TIME TO GO INSANE YUISAGFDFYOUGIOFUIYGASOIUGYFSA
+	//big list is an array of arrays, the basic arrays are HTML ID, intruder stat.something
+	let bigList = [["killsRank","stats.kills"],["arrestsRank","stats.arrests"],["deathsRank","stats.deaths"],["mwonRank","stats.matchesWon"],["mlostRank","stats.matchesLost"],["healsRank","stats.heals"],["gothealedRank","stats.gotHealed"],["teamkillsRank","stats.teamKills"]];
+	for (let item in bigList){
+		bigList[item].push(steamId);
+	}
 	
+	updateAllRank(bigList);
+	/*
 	const killsRankHTML = document.getElementById("killsRank");
 	const arrestsRankHTML = document.getElementById("arrestsRank");
 	const deathsRankHTML = document.getElementById("deathsRank");
@@ -159,8 +190,6 @@ async function getIntruderStats(steamId){
 	const healsRankHTML = document.getElementById("healsRank");
 	const gothealedRankHTML = document.getElementById("gothealedRank");
 	const teamkillsRankHTML = document.getElementById("teamkillsRank");
-	
-	
 	
 	killsRankHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
 	arrestsRankHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
@@ -188,8 +217,36 @@ async function getIntruderStats(steamId){
 	healsRankHTML.innerHTML = healsRank;
 	gothealedRankHTML.innerHTML = gothealedRank;
 	teamkillsRankHTML.innerHTML = teamkillsRank;
+	*/
 }
-
+async function returnOneRank(thing){
+	const randomHTML = document.getElementById(thing[0]);
+	randomHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
+	let randomRank = await findYourLeaderboardPosition(thing[2],thing[1]);
+	let colouredRank = giveRankColour(randomRank);
+	//randomHTML.innerHTML = colouredRank;
+	return colouredRank;
+}
+async function updateAllRank(things){
+	const somethings = things.map(returnOneRank);
+	const ranks = await Promise.all(somethings);
+	for (let item in things){
+		let randomHTML = document.getElementById(things[item][0]);
+		randomHTML.innerHTML = ranks[item];
+	}
+}
+function giveRankColour(number){
+	switch (number){
+		case "1st":
+			return "<div class=winner>1st</div>";
+		case "2nd":
+			return "<div class=secondPlace>2nd</div>";
+		case "3rd":
+			return "<div class=thirdPlace>3rd</div>";
+		default:
+			return "<div class=loser>"+number+"</div>";
+	}
+}
 async function sussyAmongusBalls(){
 	//definitions, grab the stat name, and the amount the user wants, and slice the stat so its only the usable version for us
 	let stat = document.getElementById("statName").value;

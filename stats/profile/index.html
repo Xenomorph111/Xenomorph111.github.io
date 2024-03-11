@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 	<head>
@@ -24,11 +25,8 @@
 							<a href="/about" target="_self"><div class="link">about</div></a>
 						</div>
 				</div>
-				
 			</div>
-		
-		
-		
+
 			<div id="newborn" class="mainbody" style="display:none">
 				<div class="pretty">
 				
@@ -44,48 +42,46 @@
 				</div>
 			</div>
 
-			<div id="veteran" class="mainbody" id="mainbody" style="display:flex">
+
+			<div id="veteran" class="mainbody" id="mainbody">
 				<!--block 1, left, goobly goo-->
 				<div class="ml">
 					<div class="profile">
-					<div class="level-body">
-						<div>
-							Level
-						</div>
-						<br>
-						<div id="level">
+						<div class="ign"><div id="name"></div></div>
+						<div class="level-body">
+							<div>Level</div>
+							<div id="level"></div>
+						</div>						
 							
+						<div class="pic-body">
+							<div></div>
+							<div id="pic"></div>
 						</div>
-					</div>						
-						
-					<div class="pic-body">
-						<div>
 							
+						<div class="role-body">
+							<div id="role"></div>
 						</div>
-						<br>
-						<div id="pic">
+						<div class="stat-body">
+							<div class="stat-name">Time Played Demoted</div>
+							<div class="stat-value" id="demotedTime"></div>
+						</div>
 						
+						<div class="stat-body">
+							<div class="stat-name">K/D</div>
+							<div class="stat-value" id="kd"></div>
+						</div>
+
+						<div class="stat-body">
+							<div class="stat-name">Time Played</div>
+							<div class="stat-value" id="time"></div>
 						</div>
 					</div>
-						
-					<div class="role-body">
-						<div>
-							Rank:
-						</div>
-						<br>
-						<div id="role">
-						
-						</div>
-					</div>
-				</div>
 				</div>
 					
 				<!--block 2, middle-->
 				<div class="mm">
 					<div class="mmt">
-						<div class="ign">
-						<div id="name"></div>
-						</div>
+
 					</div>
 					
 					<!--block 3, middle middle, wheels-->
@@ -97,102 +93,87 @@
 				<!--block 4, right, stats-->
 				<div class="mr">
 					<div class="rank">
-					<div class="rank-title"><div class="g">#</div></div>
+						<div class="rank-title"><div class="g">#</div></div>
+					
+						<div class="rank-body">
+							<div class="stat-value" id="killsRank"></div>
+						</div>
+						
+						<div class="rank-body">
+							<div class="stat-value" id="arrestsRank"></div>
+						</div>
+						
+						<div class="rank-body">
+							<div class="stat-value" id="deathsRank"></div>
+						</div>
+						
+						<div class="rank-body">
+							<div class="stat-value" id="mwonRank"></div>
+						</div>
+						
+						<div class="rank-body">
+							<div class="stat-value" id="mlostRank"></div>
+						</div>
+						
+						<div class="rank-body">
+							<div class="stat-value" id="healsRank"></div>
+						</div>
+						
+						<div class="rank-body">
+							<div class="stat-value" id="gothealedRank"></div>
+						</div>
+						
+						<div class="rank-body">
+							<div class="stat-value" id="teamkillsRank"></div>
+						</div>
+					</div>
 				
-					<div class="rank-body">
-						<div class="stat-value" id="killsRank"></div>
-					</div>
+					<div class="stat">
+						<div class="stat-title"><div class="g">STATS</div></div>
 					
-					<div class="rank-body">
-						<div class="stat-value" id="arrestsRank"></div>
-					</div>
-					
-					<div class="rank-body">
-						<div class="stat-value" id="deathsRank"></div>
-					</div>
-					
-					<div class="rank-body">
-						<div class="stat-value" id="kdRank"></div>
-					</div>
-					
-					<div class="rank-body">
-						<div class="stat-value" id="mwonRank"></div>
-					</div>
-					
-					<div class="rank-body">
-						<div class="stat-value" id="mlostRank"></div>
-					</div>
-					
-					<div class="rank-body">
-						<div class="stat-value" id="timeRank"></div>
-					</div>
-					
-					<div class="rank-body">
-						<div class="stat-value" id="healsRank"></div>
-					</div>
-					
-					<div class="rank-body">
-						<div class="stat-value" id="gothealedRank"></div>
-					</div>
-					
-					<div class="rank-body">
-						<div class="stat-value" id="teamkillsRank"></div>
-					</div>
-					</div>
-				<div class="stat">
-					<div class="stat-title"><div class="g">STATS</div></div>
-				
-					<div class="stat-body">
-						<div class="stat-name">Kills</div>
-						<div class="stat-value" id="kills"></div>
-					</div>
-					
-					<div class="stat-body">
-						<div class="stat-name">Arrests</div>
-						<div class="stat-value" id="arrests"></div>
-					</div>
-					
-					<div class="stat-body">
-						<div class="stat-name">Deaths</div>
-						<div class="stat-value" id="deaths"></div>
-					</div>
-					
-					<div class="stat-body">
-						<div class="stat-name">K/D</div>
-						<div class="stat-value" id="kd"></div>
-					</div>
-					
-					<div class="stat-body">
-						<div class="stat-name">Matches Won</div>
-						<div class="stat-value" id="mwon"></div>
-					</div>
-					
-					<div class="stat-body">
-						<div class="stat-name">Matches Lost</div>
-						<div class="stat-value" id="mlost"></div>
-					</div>
-					
-					<div class="stat-body">
-						<div class="stat-name">Time Played</div>
-						<div class="stat-value" id="time"></div>
-					</div>
-					
-					<div class="stat-body">
-						<div class="stat-name">Heals</div>
-						<div class="stat-value" id="heals"></div>
-					</div>
-					
-					<div class="stat-body">
-						<div class="stat-name">Got Healed</div>
-						<div class="stat-value" id="gothealed"></div>
-					</div>
-					
-					<div class="stat-body">
-						<div class="stat-name">Team Kills</div>
-						<div class="stat-value" id="teamkills"></div>
-					</div>
+						<div class="stat-body">
+							<div class="stat-name">Kills</div>
+							<div class="stat-value" id="kills"></div>
+						</div>
+						
+						<div class="stat-body">
+							<div class="stat-name">Arrests</div>
+							<div class="stat-value" id="arrests"></div>
+						</div>
+						
+						<div class="stat-body">
+							<div class="stat-name">Deaths</div>
+							<div class="stat-value" id="deaths"></div>
+						</div>
+
+						
+						<div class="stat-body">
+							<div class="stat-name">Matches Won</div>
+							<div class="stat-value" id="mwon"></div>
+						</div>
+						
+						<div class="stat-body">
+							<div class="stat-name">Matches Lost</div>
+							<div class="stat-value" id="mlost"></div>
+						</div>
+						
+						<div class="stat-body">
+							<div class="stat-name">Heals</div>
+							<div class="stat-value" id="heals"></div>
+						</div>
+						
+						<div class="stat-body">
+							<div class="stat-name">Got Healed</div>
+							<div class="stat-value" id="gothealed"></div>
+						</div>
+						
+						<div class="stat-body">
+							<div class="stat-name">Team Kills</div>
+							<div class="stat-value" id="teamkills"></div>
+						</div>
 					</div>
 				</div>
+			</div>
 				<!--block 5, bottom, comments-->
 				<!--
 				<div class="mbm">
@@ -210,11 +191,8 @@
 				</div>
 			-->
 
-			</div>
-				
-				<div class="footer">
-				
-				</div>
+			
+			<!--<div class="footer"></div>-->
 		</div>
 	</body>
 </html>

@@ -77,7 +77,13 @@ async function theSUSSYIMPOSTERISINMYBRAINHELPMEGODHELPMEHELPHELP(red,sus){
 	//finally it will return the finished table parts
 	return trudaList;
 }
-
+function neatenTime(time){
+	let timeHours = time/(60*60);
+	let timeRealHours = Math.floor(timeHours);
+	let timeMinutes = (timeHours - timeRealHours)*60;
+	let timeRealMinutes = Math.floor(Math.round(timeMinutes));
+	return timeRealHours+"h "+timeRealMinutes+"m";
+}
 
 async function sussyAmongusBalls(){
 	//definitions, grab the stat name, and the amount the user wants, and slice the stat so its only the usable version for us
@@ -119,12 +125,7 @@ async function sussyAmongusBalls(){
 		leaderboard = leaderboard +"<tr><td>&nbsp;"+count+"&nbsp;</td><td>"+"<img height=50 width = 50 src="+sortedTrudaList[elem][0]+"alt=\"\"></td><td>&nbsp;<a href=/stats/profile?steamid="+sortedTrudaList[elem][3]+">"+sortedTrudaList[elem][1]+"</a>&nbsp;</td><td>"+sortedTrudaList[elem][2]+"</td><td>&nbsp;";
 		}
 	else{
-		let timeSeconds = sortedTrudaList[elem][2];
-		let timeHours = timeSeconds/(60*60);
-		let timeRealHours = Math.floor(timeHours);
-		let timeMinutes = (timeHours - timeRealHours)*60;
-		let timeRealMinutes = Math.floor(Math.round(timeMinutes));
-		let cleanTime = timeRealHours+"h "+timeRealMinutes+"m";
+		let cleanTime = neatenTime(sortedTrudaList[elem][2]);
 		leaderboard = leaderboard +"<tr><td>&nbsp;"+count+"&nbsp;</td><td>"+"<img height=50 width = 50 src="+sortedTrudaList[elem][0]+"alt=\"\"></td><td>&nbsp;<a href=/stats/profile?steamid="+sortedTrudaList[elem][3]+">"+sortedTrudaList[elem][1]+"</a>&nbsp;</td><td>"+cleanTime+"</td><td>&nbsp;";
 		}
 	
