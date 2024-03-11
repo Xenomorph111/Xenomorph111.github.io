@@ -103,7 +103,8 @@ align-self: center;
 	width:100%;
 	background-color:#282828;
 	justify-content: center;
-	min-height:150%;
+	align-self:flex-end;
+	min-height:100%;
 	flex: 2;
 }
 .leadpage{

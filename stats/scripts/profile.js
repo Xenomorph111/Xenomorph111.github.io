@@ -225,7 +225,7 @@ async function getIntruderStats(steamId){
 }
 async function returnOneRank(thing){
 	const randomHTML = document.getElementById(thing[0]);
-	randomHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
+	randomHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img>";
 	let randomRank = await findYourLeaderboardPosition(thing[2],thing[1]);
 	let colouredRank = giveRankColour(randomRank);
 	//randomHTML.innerHTML = colouredRank;
@@ -250,48 +250,6 @@ function giveRankColour(number){
 		default:
 			return "<div class=loser>"+number+"</div>";
 	}
-}
-async function sussyAmongusBalls(){
-	//definitions, grab the stat name, and the amount the user wants, and slice the stat so its only the usable version for us
-	let stat = document.getElementById("statName").value;
-	let amnt = document.getElementById("statAmnt").value;
-	let leaderboard = "<table><tr><th>#</th><th>Pic</th><th>Name</th><th>&nbsp;Amount&nbsp;</th></tr>";
-	var trudaList = [];
-	let count = 0;
-	let rawStat = stat.slice(6);
-	let outStats = document.getElementById("output3");
-	
-	//we also wanna disable that pesky button for the time being, i dont want them to break everything...
-	const button = document.getElementById("buttonLeader");
-	button.disabled = true;
-	
-	//first we lie and tell them we are loading (ARE ASSES ARE NOT LOADING)
-	outStats.innerHTML = "<img width=25 height=25 src=/assets/loading.gif></img>";
-	
-	//make the url to grab the data we want. then get the data
-	let apiUrl = 'https://api.intruderfps.com/agents' +'?OrderBy=' + stat +'%3Adesc&PerPage='+amnt+'&&Page=1';
-	const rawData = await fetchData(apiUrl);
-	
-	//lets wait for the async function to finish so we get 100 users all ordered
-	sortedTrudaList = await theSUSSYIMPOSTERISINMYBRAINHELPMEGODHELPMEHELPHELP(rawData,rawStat);
-
-	//sort this list, wait. we dont need to anymore, LETS FUCKING GO EZ CLAP FORTNITE DUBS EZ EZ EZ EZ EZ EZ
-	/*
-	var sortedTrudaList = trudaList.sort(function(a, b) {
-		return b[2] - a[2];
-	});
-	*/
-	
-	//now we assemble the table, in its glory
-	for(let elem in sortedTrudaList){
-	count = count+1;
-	leaderboard = leaderboard +"<tr><td>&nbsp;"+count+"&nbsp;</td><td>"+"<img height=50 width = 50 src="+sortedTrudaList[elem][0]+"alt=\"\"></td><td>&nbsp;"+sortedTrudaList[elem][1]+"&nbsp;</td><td>"+sortedTrudaList[elem][2]+"</td></tr>";
-	}
-	leaderboard = leaderboard+"</table>";
-	
-	//now we grab where the table is, and we paste it in, and we are so done, AND we re-enable that button
-	outStats.innerHTML = leaderboard;
-	button.disabled = false;
 }
 
 async function updateUIElements(div,content1,content2,url){
