@@ -134,6 +134,34 @@ async function getIntruderStats(steamId){
 	let gh = JSON.stringify(rawStats.gotHealed);
 	ghHTML.innerHTML = gh;
 	
+	const tdHTML = document.getElementById("teamdamage");
+	let td = JSON.stringify(rawStats.teamDamage);
+	tdHTML.innerHTML = td;
+	
+	const tknHTML = document.getElementById("teamknockdowns");
+	let tkn = JSON.stringify(rawStats.teamKnockdowns);
+	tknHTML.innerHTML = tkn;
+	
+	const capHTML = document.getElementById("captures");
+	let cap = JSON.stringify(rawStats.captures);
+	capHTML.innerHTML = cap;
+	
+	const pickHTML = document.getElementById("pickups");
+	let pick = JSON.stringify(rawStats.pickups);
+	pickHTML.innerHTML = pick;
+	
+	const survHTML = document.getElementById("survivals");
+	let surv = JSON.stringify(rawStats.survivals);
+	survHTML.innerHTML = surv;
+	
+	const suiHTML = document.getElementById("suicides");
+	let sui = JSON.stringify(rawStats.suicides);
+	suiHTML.innerHTML = sui;
+	
+	const netHTML = document.getElementById("networkhacks");
+	let net = JSON.stringify(rawStats.networkHacks);
+	netHTML.innerHTML = net;
+	
 	const steamHTML = document.getElementById("steam");
 	let steam = "<a href=https://steamcommunity.com/profiles/"+steamId+" target=_blank>Steam</a>";
 	steamHTML.innerHTML = steam;
@@ -182,49 +210,13 @@ async function getIntruderStats(steamId){
 	//saved myself so many man hours
 	//TIME TO GO INSANE YUISAGFDFYOUGIOFUIYGASOIUGYFSA
 	//big list is an array of arrays, the basic arrays are HTML ID, intruder stat.something
-	let bigList = [["killsRank","stats.kills"],["arrestsRank","stats.arrests"],["deathsRank","stats.deaths"],["mwonRank","stats.matchesWon"],["mlostRank","stats.matchesLost"],["healsRank","stats.heals"],["gothealedRank","stats.gotHealed"],["teamkillsRank","stats.teamKills"]];
+	let bigList = [["killsRank","stats.kills"],["arrestsRank","stats.arrests"],["deathsRank","stats.deaths"],["mwonRank","stats.matchesWon"],["mlostRank","stats.matchesLost"],["healsRank","stats.heals"],["gothealedRank","stats.gotHealed"],["teamkillsRank","stats.teamKills"],["teamdamageRank","stats.teamDamage"],["teamknockdownsRank","stats.teamknockdowns"],["capturesRank","stats.captures"],["pickupsRank","stats.pickups"],["survivalsRank","stats.survivals"],["suicidesRank","stats.suicides"],["networkhacksRank","stats.networkHacks"]];
 	for (let item in bigList){
 		bigList[item].push(steamId);
 	}
 	
 	updateAllRank(bigList);
-	/*
-	const killsRankHTML = document.getElementById("killsRank");
-	const arrestsRankHTML = document.getElementById("arrestsRank");
-	const deathsRankHTML = document.getElementById("deathsRank");
-	const mwonRankHTML = document.getElementById("mwonRank");
-	const mlostRankHTML = document.getElementById("mlostRank");
-	const healsRankHTML = document.getElementById("healsRank");
-	const gothealedRankHTML = document.getElementById("gothealedRank");
-	const teamkillsRankHTML = document.getElementById("teamkillsRank");
-	
-	killsRankHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
-	arrestsRankHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
-	deathsRankHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
-	mwonRankHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
-	mlostRankHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
-	healsRankHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
-	gothealedRankHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
-	teamkillsRankHTML.innerHTML = "<img width=5px height=5px src=/assets/loading.gif></img";
-	
-	const killsRank = await findYourLeaderboardPosition(steamId,"stats.kills");
-	const arrestsRank = await findYourLeaderboardPosition(steamId,"stats.arrests");
-	const deathsRank = await findYourLeaderboardPosition(steamId,"stats.deaths");
-	const mwonRank = await findYourLeaderboardPosition(steamId,"stats.matchesWon");
-	const mlostRank = await findYourLeaderboardPosition(steamId,"stats.matchesLost");
-	const healsRank = await findYourLeaderboardPosition(steamId,"stats.heals");
-	const gothealedRank = await findYourLeaderboardPosition(steamId,"stats.gotHealed");
-	const teamkillsRank = await findYourLeaderboardPosition(steamId,"stats.teamKills");
-	
-	killsRankHTML.innerHTML = killsRank;
-	arrestsRankHTML.innerHTML = arrestsRank;
-	deathsRankHTML.innerHTML = deathsRank;
-	mwonRankHTML.innerHTML = mwonRank;
-	mlostRankHTML.innerHTML = mlostRank;
-	healsRankHTML.innerHTML = healsRank;
-	gothealedRankHTML.innerHTML = gothealedRank;
-	teamkillsRankHTML.innerHTML = teamkillsRank;
-	*/
+
 }
 async function returnOneRank(thing){
 	const randomHTML = document.getElementById(thing[0]);
@@ -269,7 +261,7 @@ async function sussyAmongusBalls(){
 	button.disabled = true;
 	
 	//first we lie and tell them we are loading (ARE ASSES ARE NOT LOADING)
-	outStats.innerHTML = "<img width=25 height=25 src=../assets/loading.gif></img>";
+	outStats.innerHTML = "<img width=25 height=25 src=/assets/loading.gif></img>";
 	
 	//make the url to grab the data we want. then get the data
 	let apiUrl = 'https://api.intruderfps.com/agents' +'?OrderBy=' + stat +'%3Adesc&PerPage='+amnt+'&&Page=1';
