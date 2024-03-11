@@ -32,9 +32,17 @@
 							<br><h1>LEADERBOARD</h1><br>
 						</div>
 						<div class="leaderboardPrecursor">
+							<div class="option2">
+								TOP:&nbsp;&nbsp;<select name="Amount" id="statAmnt" style='width:140px;margin:1px 0px;'>
+									<option value="10">10</option>
+									<option value="25">25</option>
+									<option value="50">50</option>
+									<option value="100">100</option>
+								</select>
+							</div>
 							<div class="option1">
 							<!--Here are all the options(actually not all of them kill yourself) @xenomorph101 if you want me to add more-->
-								TOP:&nbsp;&nbsp;<select name="stats" id="statName">
+								&nbsp;&nbsp;IN:&nbsp;&nbsp;<select name="stats" id="statName" style='width:150px;margin:1px 0px;'>
 									<option value="stats.kills">Kills</option>
 									<option value="stats.deaths">Deaths</option>
 									<option value="stats.arrests">Arrests</option>
@@ -52,16 +60,8 @@
 									<option value="stats.timePlayed">Time Played</option>
 								</select>
 							</div>
-							<div class="option2">
-								<select name="Amount" id="statAmnt">
-									<option value="10">10</option>
-									<option value="25">25</option>
-									<option value="50">50</option>
-									<option value="100">100</option>
-								</select>
-							</div>
 							<div class="option3">
-								<button id="buttonLeader" onclick="sussyAmongusBalls()">Get Stats</button>
+								<button id="buttonLeader" onclick="sussyAmongusBalls()" style='width:190px;margin:2px 0px;'>Get Leaderboard</button>
 							</div>
 						</div>
 						<div class="leaderboardStats">
