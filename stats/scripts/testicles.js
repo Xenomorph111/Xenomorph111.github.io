@@ -106,9 +106,7 @@ async function getIntruderStats(steamId){
 	let killRatio = Math.round((kills/deaths + Number.EPSILON) * 100) / 100;
 	kdHTML.innerHTML = killRatio;
 	
-	const timeDemotedHTML = document.getElementById("demotedTime");
-	let timeDemoted = JSON.stringify(rawStats.timePlayedDemoted);
-	timeDemotedHTML.innerHTML = neatenTime(timeDemoted);
+
 	
 	const arrestsHTML = document.getElementById("arrests");
 	let arrests = JSON.stringify(rawStats.arrests)
@@ -135,6 +133,10 @@ async function getIntruderStats(steamId){
 	const ghHTML = document.getElementById("gothealed");
 	let gh = JSON.stringify(rawStats.gotHealed);
 	ghHTML.innerHTML = gh;
+	
+	const steamHTML = document.getElementById("steam");
+	let steam = "<a href=https://steamcommunity.com/profiles/"+steamId+" target=_blank>Steam</a>";
+	steamHTML.innerHTML = steam;
 	
 	const timeHTML = document.getElementById("time");
 	let time = JSON.stringify(rawStats.timePlayed);
@@ -164,6 +166,11 @@ async function getIntruderStats(steamId){
 			break;
 		case "Demoted":
 			roleOops = "<div class=demoted>Demoted</div>";
+			const timeDemotedHTML = document.getElementById("demotedTime");
+			let timeDemoted = JSON.stringify(rawStats.timePlayedDemoted);
+			timeDemotedHTML.innerHTML = neatenTime(timeDemoted);
+			const dem = document.getElementById("dem");
+			dem.style.display = "block";
 			break;
 		default:
 			roleOops = "<div class=agent>Agent</div>";
