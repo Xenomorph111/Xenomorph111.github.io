@@ -276,7 +276,7 @@ img {
 }
 .rank-body{
 	display:flex;
-	justify-content:space-between;
+	justify-content:center;
 	align-items:center;
 	margin:2px 0px;
 	padding:2px 0px;
@@ -345,6 +345,10 @@ img {
 	color:A8A8A8;
 }
 .pretty .gent{
+	align-self: center;
+	
+}
+.pretty .baby{
 	align-self: center;
 	
 }

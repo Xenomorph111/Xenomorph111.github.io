@@ -108,7 +108,7 @@ async function sussyAmongusBalls(){
 	button.disabled = true;
 	
 	//first we lie and tell them we are loading (ARE ASSES ARE NOT LOADING)
-	outStats.innerHTML = "<img width=25 height=25 src=/assets/loading.gif></img>";
+	outStats.innerHTML = "<img width=25 height=25 border-radius=50% src=/assets/loading.gif></img>";
 	
 	//make the url to grab the data we want. then get the data
 	let apiUrl = 'https://api.intruderfps.com/agents' +'?OrderBy=' + stat +'%3Adesc&PerPage='+amnt+'&&Page=1';

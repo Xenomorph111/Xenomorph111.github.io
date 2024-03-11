@@ -58,7 +58,12 @@ async function findYourLeaderboardPosition(steamId,stat){
 				}
 			}
 			else{
+			if(position>1000){
+				return "NA";
+			}
+			else{
 			position=position+1;
+			}
 			}
 		}
 		
