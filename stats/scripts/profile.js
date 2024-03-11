@@ -310,6 +310,9 @@ const steamid = urlParams.get('steamid');
 if(!steamid==true){
 	//first time?
 	//console.log("THE URL IS NEW");
+	const vet = document.getElementById("veteran");
+	vet.style.display="none"
+	
 	const baby = document.getElementById("newborn");
 	baby.style.display = "block";
 }
