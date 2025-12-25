@@ -405,3 +405,14 @@ a:active {
 	background-color:#282828;
 	justify-content: center;
 }
+.mmm {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.leftmiddle, .rightmiddle {
+    width: 220px;
+    height: 220px;
+}
+
