@@ -1,4 +1,3 @@
-
 async function fetchData(url){
 	try{
 	const response = await fetch(url);
@@ -286,3 +285,66 @@ else
 	getIntruderStats(steamid);
 }
 }
+// ---- COMBAT STATS WHEEL ----
+const combatCtx = document.getElementById("combatWheel");
+
+new Chart(combatCtx, {
+    type: "doughnut",
+    data: {
+        labels: ["Kills", "Arrests", "Got Arrested", "Deaths"],
+        datasets: [{
+            data: [
+                120, // kills
+                45,  // arrests
+                12,  // got arrested
+                30   // deaths
+            ],
+            backgroundColor: [
+                "#e74c3c",
+                "#3498db",
+                "#f1c40f",
+                "#7f8c8d"
+            ],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                position: "bottom"
+            }
+        }
+    }
+});
+
+
+// ---- VOTE STATS WHEEL ----
+const voteCtx = document.getElementById("voteWheel");
+
+new Chart(voteCtx, {
+    type: "doughnut",
+    data: {
+        labels: ["Your Votes", "Upvotes", "Downvotes"],
+        datasets: [{
+            data: [
+                20, // votes you gave
+                85, // upvotes received
+                15  // downvotes received
+            ],
+            backgroundColor: [
+                "#9b59b6",
+                "#2ecc71",
+                "#e74c3c"
+            ],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                position: "bottom"
+            }
+        }
+    }
+});
+
