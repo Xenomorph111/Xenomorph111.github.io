@@ -3,6 +3,7 @@
 
 	<head>
 		<link rel="stylesheet" type="text/css" href="/css/styles.css">
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<script src="/stats/scripts/profile.js"></script>
 		<title id="title">Intruder Profile</title>
 			<link id="profile" rel="icon" href=
@@ -89,11 +90,15 @@
 
 					</div>
 					
-					<!--block 3, middle middle, wheels-->
 					<div class="mmm">
-						<div class="leftmiddle"></div>
-						<div class="rightmiddle"></div>
+    						<div class="leftmiddle">
+        						<canvas id="combatWheel"></canvas>
+    						</div>
+    						<div class="rightmiddle">
+        						<canvas id="voteWheel"></canvas>
+    						</div>
 					</div>
+
 				</div>
 				<!--block 4, right, stats-->
 				<div class="mr">
